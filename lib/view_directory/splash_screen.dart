@@ -43,8 +43,17 @@ class _SplashScreenAnimatedViewState extends State<SplashScreenAnimatedView>
                     // here we decide angle of rotation
                     angle: _controller.value * 2.0 * math.pi,
                     child: child,
-                      );
+                  );
                 }),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * .08,
+            ),
+            Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'Covid-19\n Tracker App',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                ))
           ],
         ),
       ),
@@ -59,5 +68,5 @@ Duration is used for time take to splash/animate  on screen also vsync: this)
  AnimatedBuilder is used for screen animation
  also  builder: (BuildContext context, Widget? child)  is used for animation
 child of Transform.rotate is equal to child which actually means child of  AnimatedBuilder contaiing child as image
-
+Text widget is aligned with Align(alignment: Alignment.center,) to make it align at center
 */
