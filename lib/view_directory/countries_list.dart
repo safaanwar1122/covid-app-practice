@@ -13,7 +13,8 @@ class _CountriesListState extends State<CountriesList> {
   TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    StatesServices statesServices=StatesServices();// object creation of class
+    StatesServices statesServices =
+        StatesServices(); // object creation of class
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -35,21 +36,35 @@ class _CountriesListState extends State<CountriesList> {
                 ),
               ),
             ),
-            Expanded(child: FutureBuilder(
-                future: statesServices.countriesListApi(),//function is called via object
-                builder: (context, AsyncSnapshot<List<dynamic>> snapshot){
-               if(!snapshot.hasData){
-                 return Text('loading');
-               }
-               else {
-                 return ListTile(
-
-                 );
-               }
-
+            Expanded(
+              child: FutureBuilder(
+                future: statesServices
+                    .countriesListApi(), //function is called via object
+                builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Text('loading');
+                  } else {
+                    return ListView.builder(
+                        itemCount: snapshot.data?.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              ListTile(
+                                title: Text(snapshot.data![index]['country']),
+                                subtitle: Text(snapshot.data![index]['cases'].toString()),
+                                leading: Image(
+                                  height: 50,
+                                  width: 50,
+                                  image: NetworkImage(snapshot.data![index]
+                                      ['countryInfo']['flag']),
+                                ),
+                              ),
+                            ],
+                          );
+                        });
+                  }
                 },
-
-            ),
+              ),
             ),
           ],
         ),
