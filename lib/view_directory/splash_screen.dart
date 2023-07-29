@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:covid_app_practice/view_directory/world_states.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -15,9 +18,20 @@ class _SplashScreenAnimatedViewState extends State<SplashScreenAnimatedView>
       AnimationController(duration: const Duration(seconds: 3), vsync: this)
         ..repeat();
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _controller.dispose();
+  }
+
   void initState() {
     // TODO: implement initState
     super.initState();
+    Timer(
+        Duration(seconds: 3),
+        () => Navigator.push(context,
+            MaterialPageRoute(builder: (_controller) => WorldStateScreen())));
+    ;
   }
 
   @override
